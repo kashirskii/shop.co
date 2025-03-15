@@ -1,1 +1,38 @@
+@font-face {
+    font-family: 'Satoshi-Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url("/src/shared/assets/fonts/Satoshi-Regular.otf") format("otf");
+}
+
+@font-face {
+    font-family: 'Satoshi-Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: url("/src/shared/assets/fonts/Satoshi-Bold.otf") format("otf");
+}
+
+@font-face {
+    font-family: 'IntegralCF-Bold';
+    font-style: normal;
+    font-weight: 700;
+    src: url("/src/shared/assets/fonts/IntegralCF-Bold.woff2") format("woff2");
+}
+
+:root {
+    --Satoshi-Regular: 'Satoshi-Regular', sans-serif;
+    --Satoshi-Bold: 'Satoshi-Bold', sans-serif;
+    --IntegralCF-Bold: 'IntegralCF-Bold', sans-serif;
+}
+
+@layer base {
+    body {
+      font-family: var(--Satoshi-Regular);
+    }
+
+    body *:where([font-weight="700"], .font-bold) {
+        font-family: var(--Satoshi-Bold);
+    }
+}
+
 @import "tailwindcss";

@@ -2,14 +2,16 @@
     font-family: 'Satoshi-Regular';
     font-style: normal;
     font-weight: 400;
-    src: url("/src/shared/assets/fonts/Satoshi-Regular.otf") format("otf");
+    src: url("/src/shared/assets/fonts/Satoshi-Regular.woff") format("woff"),
+         url("/src/shared/assets/fonts/Satoshi-Regular.woff2") format("woff2");
 }
 
 @font-face {
     font-family: 'Satoshi-Bold';
     font-style: normal;
     font-weight: 700;
-    src: url("/src/shared/assets/fonts/Satoshi-Bold.otf") format("otf");
+    src: url("/src/shared/assets/fonts/Satoshi-Bold.woff") format("woff"),
+         url("/src/shared/assets/fonts/Satoshi-Bold.woff2") format("woff2");
 }
 
 @font-face {

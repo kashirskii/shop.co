@@ -1,6 +1,7 @@
-export const CartIcon = () => {
+export const CartIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="23"
       height="22"

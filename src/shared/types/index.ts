@@ -1,0 +1,1 @@
+export type { NonNegative } from './non-negative'

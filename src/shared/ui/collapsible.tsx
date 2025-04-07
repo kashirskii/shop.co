@@ -5,6 +5,7 @@ interface CollapsibleProps {
   open?: boolean;
   setOpen?: React.Dispatch<boolean>;
   children: React.ReactNode;
+  defaultOpen?: boolean;
 }
 
 interface CollapsibleContext {
@@ -21,8 +22,9 @@ export const Collapsible = ({
   open: controlledOpen,
   setOpen: controlledSetOpen,
   children,
+  defaultOpen,
 }: CollapsibleProps) => {
-  const [internalOpen, setInternalOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(defaultOpen ?? true);
 
   const open = controlledOpen ?? internalOpen;
   const setOpen = controlledSetOpen ?? setInternalOpen;

@@ -1,3 +1,4 @@
+import { UseQueryOptions } from "@tanstack/react-query";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 export type RequestConfig<
@@ -5,6 +6,10 @@ export type RequestConfig<
   D = unknown,
   R = AxiosResponse<D>
 > = (args?: { params?: P; config?: AxiosRequestConfig<P> }) => Promise<R>;
+
+export type QuerySettings<T extends () => unknown> = {
+  options?: UseQueryOptions<Awaited<ReturnType<T>>, Error>;
+} & Parameters<T>[0];
 
 export type Clothes = {
   id: number;

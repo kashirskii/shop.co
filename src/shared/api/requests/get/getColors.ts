@@ -1,11 +1,8 @@
-import { instance } from "@/shared/api/instance";
-import type { Color, RequestConfig } from "@/shared/api/types";
+import { Color, RequestConfig, instance } from "@/shared/api";
 
-export const getColors: RequestConfig<object, Color[]> = ({
-  params,
-  config,
-} = {}) =>
+export type GetColorsRequestConfig = RequestConfig<undefined, Color[]>;
+
+export const getColors: GetColorsRequestConfig = ({ config } = {}) =>
   instance.get("/colors", {
     ...config,
-    params: { ...config?.params, ...params },
   });

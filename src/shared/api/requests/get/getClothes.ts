@@ -1,15 +1,17 @@
-import { instance } from "@/shared/api/instance";
 import {
+  instance,
   GetClothesParams,
   PageClothingResponseDto,
   RequestConfig,
-} from "@/shared/api/types";
+} from "@/shared/api";
 
-export const getClothes: RequestConfig<
+export type GetClothesRequestConfig = RequestConfig<
   GetClothesParams,
   PageClothingResponseDto
-> = ({ params, config } = {}) =>
+>;
+
+export const getClothes: GetClothesRequestConfig = ({ params, config } = {}) =>
   instance.get("/clothes", {
-    ...config,
     params: { ...config?.params, ...params },
+    ...config,
   });

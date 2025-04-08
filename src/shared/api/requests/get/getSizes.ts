@@ -1,11 +1,8 @@
-import { instance } from "@/shared/api/instance";
-import type { RequestConfig, Size } from "@/shared/api/types";
+import { RequestConfig, Size, instance } from "@/shared/api";
 
-export const getSizes: RequestConfig<object, Size[]> = ({
-  params,
-  config,
-} = {}) =>
+export type GetSizesRequestConfig = RequestConfig<undefined, Size[]>;
+
+export const getSizes: GetSizesRequestConfig = ({ config } = {}) =>
   instance.get("/sizes", {
     ...config,
-    params: { ...config?.params, ...params },
   });

@@ -5,9 +5,17 @@ import type { QuerySettings } from "@/shared/api";
 
 export const useGetColorsQuery = (
   settings?: QuerySettings<GetColorsRequestConfig>
-) =>
-  useQuery({
+) => {
+  const query = useQuery({
     queryKey: ["colors"],
     queryFn: () => getColors({ config: settings?.config }),
     ...settings?.options,
   });
+
+  const { data: axiosResponse, ...rest } = query;
+
+  return {
+    axiosResponse,
+    ...rest,
+  };
+};

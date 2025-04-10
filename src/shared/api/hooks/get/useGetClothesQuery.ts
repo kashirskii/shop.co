@@ -9,7 +9,7 @@ export const useGetClothesQuery = (
   const query = useQuery({
     queryKey: ["clothes"],
     queryFn: () =>
-      getClothes({ config: settings?.config, params: settings?.params }),
+      getClothes({ config: settings?.config, params: settings?.params || {} }),
     ...settings?.options,
   });
 

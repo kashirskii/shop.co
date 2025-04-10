@@ -1,13 +1,14 @@
 import { UseQueryOptions } from "@tanstack/react-query";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 
-export type RequestConfig<
-  P = unknown,
-  D = unknown,
-  R = AxiosResponse<D>
-> = (args?: { params?: P; config?: AxiosRequestConfig<P> }) => Promise<R>;
+export type RequestConfig<P = undefined, D = unknown, R = AxiosResponse<D>> = (
+  args: P extends undefined
+    ? { config?: AxiosRequestConfig<P> }
+    : { params: P; config?: AxiosRequestConfig<P> }
+) => Promise<R>;
 
-export type QuerySettings<T extends () => unknown> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type QuerySettings<T extends (...args: any[]) => any> = {
   options?: UseQueryOptions<Awaited<ReturnType<T>>, Error>;
 } & Parameters<T>[0];
 

@@ -10,11 +10,8 @@ export type GetClothesRequestConfig = RequestConfig<
   PageClothingResponseDto
 >;
 
-export const getClothes: GetClothesRequestConfig = ({
-  params,
-  config,
-} = {}) => {
-  const { size, color, ...restParams } = params || {};
+export const getClothes: GetClothesRequestConfig = ({ params, config }) => {
+  const { size, color, ...restParams } = params;
 
   return instance.get("/clothes", {
     params: {

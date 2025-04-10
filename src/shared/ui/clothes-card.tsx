@@ -2,7 +2,7 @@ export const ClothesCard = ({
   className,
   ...props
 }: React.ComponentProps<"div">) => (
-  <div className={`flex gap-4 ${className}`} {...props} />
+  <div className={`flex gap-4 ${className}`} {...props} draggable={false} />
 );
 
 export const Image = ({
@@ -12,7 +12,7 @@ export const Image = ({
 }: React.ComponentProps<"div"> & { src: string }) => {
   return (
     <div
-      className={`max-w-[300px] max-h-[300px] bg-[#F0EEED] rounded-2xl ${className}`}
+      className={`max-w-[300px] max-h-[300px] bg-[#F0EEED] rounded-2xl pointer-events-none select-none ${className}`}
       {...props}
     >
       <img src={src} className="w-full h-full" />

@@ -38,12 +38,11 @@ const PaginationContext = createContext<PaginationContext<number> | undefined>(
 
 export const Pagination = <T extends number>({
   page: controlledPage,
+  onChange,
   count,
   defaultPage = 1 as NonNegative<T>,
   siblingCount = 1 as NonNegative<T>,
   boundaryCount = 1 as NonNegative<T>,
-  onChange,
-  children,
   className,
   ...props
 }: PaginationProps<T> &
@@ -63,8 +62,10 @@ export const Pagination = <T extends number>({
     <PaginationContext.Provider
       value={{ count, siblingCount, page, setPage, boundaryCount }}
     >
-      <div className={`flex gap-1 ${className}`} {...props}>
-        {children}
+      <div className={`flex justify-between w-full ${className}`} {...props}>
+        <PreviousButton />
+        <Items />
+        <NextButton />
       </div>
     </PaginationContext.Provider>
   );
@@ -83,11 +84,14 @@ export const Items = ({
 
   const totalBlocksCount = 3 + siblingCount * 2 + boundaryCount * 2;
 
-  if (count < totalBlocksCount) {
-    return Array.from({ length: count }, (_, index) => (
-      <PaginationItem key={index + 1} number={index + 1} />
-    ));
-  }
+  if (count < totalBlocksCount)
+    return (
+      <ul className={`flex gap-1 ${className}`}>
+        {Array.from({ length: count }, (_, index) => (
+          <PaginationItem key={index + 1} number={index + 1} />
+        ))}
+      </ul>
+    );
 
   const shouldShowLeftEllipsis = () =>
     page - siblingCount - (boundaryCount + 1) <= 1;
@@ -98,17 +102,17 @@ export const Items = ({
   return (
     <ul className={`flex gap-1 ${className}`} {...props}>
       {[...Array(boundaryCount)].map((_, i) => (
-        <li>
-          <PaginationItem key={boundaryCount + i} number={i + 1} />
+        <li key={boundaryCount + i}>
+          <PaginationItem number={i + 1} />
         </li>
       ))}
 
       {shouldShowLeftEllipsis() ? (
-        <li>
+        <li key={boundaryCount + 1}>
           <PaginationItem number={boundaryCount + 1} />
         </li>
       ) : (
-        <li>
+        <li key="leftEllipsis">
           <Ellipsis />
         </li>
       )}
@@ -119,25 +123,25 @@ export const Items = ({
           count - boundaryCount - 2 - (siblingCount * 2 - 1) + i
         );
         return (
-          <li>
-            <PaginationItem key={pageNumber} number={pageNumber} />
+          <li key={pageNumber}>
+            <PaginationItem number={pageNumber} />
           </li>
         );
       })}
 
       {shouldShowRightEllipsis() ? (
-        <li>
+        <li key={count - boundaryCount}>
           <PaginationItem number={count - boundaryCount} />
         </li>
       ) : (
-        <li>
+        <li key="rightEllipsis">
           <Ellipsis />
         </li>
       )}
 
       {[...Array(boundaryCount)].map((_, i) => (
-        <li>
-          <PaginationItem key={i} number={count - boundaryCount + i + 1} />
+        <li key={count - boundaryCount + i + 1}>
+          <PaginationItem number={count - boundaryCount + i + 1} />
         </li>
       ))}
     </ul>
@@ -241,7 +245,3 @@ const NextButton = ({
     </button>
   );
 };
-
-Pagination.PreviousButton = PreviousButton;
-Pagination.NextButton = NextButton;
-Pagination.Items = Items;
